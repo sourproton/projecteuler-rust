@@ -1,17 +1,37 @@
 fn main() {
-    method_1();
+    const LIMIT: isize = 20;
+
+    let answer = min_divisible(LIMIT);
+
+    println!("{answer}");
 }
 
-fn method_1() {
-    let mut i = 1;
-    'main_loop: loop {
-        for j in 2..=20 {
-            if i % j != 0 {
-                i += 1;
-                continue 'main_loop;
-            }
+fn isdivisable(n: isize, limit: isize) -> bool {
+    for i in 1..=limit {
+        if n % i != 0 {
+            return false;
         }
-        break;
     }
-    println!("{i}");
+
+    true
+}
+
+fn min_divisible(limit: isize) -> isize {
+    let mut n = 1;
+
+    while !(isdivisable(n, limit)) {
+        n += 1;
+    }
+
+    n
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::min_divisible;
+    #[test]
+    fn works() {
+        let answer = min_divisible(10);
+        assert_eq!(answer, 2520);
+    }
 }

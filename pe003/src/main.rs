@@ -1,18 +1,30 @@
 fn main() {
-    const NUM: u64 = 600851475143;
-    let answer = largest_prime_factor(NUM);
-    println!("{}", answer);
+    const N: isize = 600851475143;
+
+    let answer = largest_prime_factor(N);
+
+    println!("{answer}");
 }
 
-fn largest_prime_factor(mut n: u64) -> u64 {
-    let mut test = 2;
-    let mut largest = 0;
-    while n != 1 {
-       while n % test == 0 {
-           largest = test;
-           n = n / test;
-       } 
-       test += 1;
+fn largest_prime_factor(mut n: isize) -> isize {
+    let mut p = 2;
+
+    while p != n {
+        while n % p == 0 {
+            n /= p;
+        }
+        p += 1;
     }
-    largest
+
+    p
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::largest_prime_factor;
+    #[test]
+    fn it_works() {
+        let result = largest_prime_factor(13195);
+        assert_eq!(result, 29);
+    }
 }

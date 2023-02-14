@@ -1,24 +1,16 @@
-fn sum_prime(n: usize) -> usize {
-    // sieve is a vector corresponding to 2 up to n
-    let mut sieve = vec![true; n-1];
-    let mut sum = 0;
+fn main() {
+    const N: usize = 2_000_000;
+    let mut sieve = [true; N];
+    let mut s = 0;
 
-    for num in 2..=n {
-        if sieve[num-2] {
-            sum += num;
-
-            for i in (2*num..=n).step_by(num) {
-                if sieve[i-2] {
-                    sieve[i-2] = false;
-                }
+    for i in 2..=N {
+        if sieve[i - 1] {
+            s += i;
+            for j in (i + i..=N).step_by(i) {
+                sieve[j - 1] = false;
             }
         }
     }
 
-    sum
-}
-
-fn main() {
-    const NUM: usize = 1_999_999;
-    println!("{}", sum_prime(NUM));
+    println!("{s}");
 }

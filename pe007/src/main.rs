@@ -1,34 +1,30 @@
-fn nthprime(n: i32) -> i32 {
-    let mut primes = Vec::new();
+fn main() {
+    const N: usize = 10_001;
+    let mut primes: [usize; N] = [0; N];
     let mut i = 2;
-    let mut found = 0;
-    let mut isprime = true;
 
-    while found < n {
-        for p in &primes {
-            if i % p == 0 {
-                isprime = false;
+    while primes[N - 1] == 0 {
+        for p in 0..N {
+            if primes[p] == 0 {
+                primes[p] = i;
+                i += 1;
+                break;
+            } else if i % primes[p] == 0 {
+                i += 1;
                 break;
             }
         }
-
-        if isprime {
-            found += 1;
-            primes.push(i);
-        } else {
-            isprime = true;
-        }
-
-        i += 1;
     }
 
-    primes[n as usize - 1]
+    println!("{}", primes[N - 1]);
 }
 
-fn main() {
-    const NUM: i32 = 10001;
-    
-    let answer = nthprime(NUM);
-
-    println!("{answer}");
-}
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//
+//     #[test]
+//     fn working() {
+//         assert_eq!(2 + 2, 4)
+//     }
+// }
