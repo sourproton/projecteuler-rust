@@ -5,7 +5,7 @@ const TARGET_FRACTION: Fraction = Fraction {
     denominator: 7,
 };
 
-const MAX_DENOMINATOR: u32 = 1_000_000;
+const MAX_DENOMINATOR: u64 = 1_000_000;
 
 fn main() {
     let time = SystemTime::now();
@@ -17,7 +17,7 @@ fn main() {
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
-fn find_closest(max_denominator: u32, target_fraction: Fraction) -> Fraction {
+fn find_closest(max_denominator: u64, target_fraction: Fraction) -> Fraction {
     let mut best_fraction = Fraction {
         numerator: 0,
         denominator: 1,
@@ -36,14 +36,14 @@ fn find_closest(max_denominator: u32, target_fraction: Fraction) -> Fraction {
     best_fraction
 }
 
-fn find_numerator(denominator: &u32, target_fraction: &Fraction) -> u32 {
+fn find_numerator(denominator: &u64, target_fraction: &Fraction) -> u64 {
     (denominator * target_fraction.numerator - 1) / (target_fraction.denominator)
 }
 
 #[derive(Debug)]
 struct Fraction {
-    numerator: u32,
-    denominator: u32,
+    numerator: u64,
+    denominator: u64,
 }
 
 #[cfg(test)]
