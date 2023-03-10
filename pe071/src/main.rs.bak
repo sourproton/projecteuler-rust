@@ -1,0 +1,90 @@
+// sort of naive implementation
+
+use std::time::SystemTime;
+
+const MAX_DENOMINATOR: u32 = 1_000_000;
+const TARGET_NUMERATOR: u32 = 3;
+const TARGET_DENOMINATOR: u32 = 7;
+
+fn main() {
+    let time = SystemTime::now();
+
+    let answer = find_before(MAX_DENOMINATOR, TARGET_NUMERATOR, TARGET_DENOMINATOR);
+
+    println!(
+        "fraction before {TARGET_NUMERATOR}/{TARGET_DENOMINATOR}: {:?}",
+        answer
+    );
+
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
+}
+
+fn find_before(
+    max_denominator: u32,
+    target_numerator: u32,
+    target_denominator: u32,
+) -> ReducedProperFraction {
+    let target_value = (target_numerator as f64) / (target_denominator as f64);
+    let mut closest = ReducedProperFraction {
+        numerator: 0,
+        denominator: 0,
+        value: 0.0,
+    };
+    let mut value;
+
+    for d in 2..=max_denominator {
+        for n in 1..d {
+            value = (n as f64) / (d as f64);
+            if value < target_value {
+                if closest.value < value && hcf(n, d) == 1 {
+                    closest.numerator = n;
+                    closest.denominator = d;
+                    closest.value = value;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+    closest
+}
+
+/// computes the Highest Common Factor (HCF) of `a` and `b` by the division method
+fn hcf(a: u32, b: u32) -> u32 {
+    let (mut dividend, mut divisor) = (a.max(b), a.min(b));
+    let mut remainder = dividend % divisor;
+    while remainder != 0 {
+        dividend = divisor;
+        divisor = remainder;
+        remainder = dividend % divisor;
+    }
+    divisor
+}
+
+/// stores the numerator, denominator and float value of a reduced proper fraction (n/d; n<d)
+#[derive(Debug)]
+struct ReducedProperFraction {
+    numerator: u32,
+    denominator: u32,
+    value: f64,
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{find_before, hcf};
+
+    #[test]
+    fn test_hcf() {
+        assert_eq!(28, hcf(28, 56));
+        assert_eq!(28, hcf(56, 28));
+        assert_eq!(12, hcf(24, 36));
+        assert_eq!(1, hcf(3, 7));
+    }
+
+    #[test]
+    fn test_find_before() {
+        let found = find_before(8, 3, 7);
+        assert_eq!(2, found.numerator);
+        assert_eq!(5, found.denominator);
+    }
+}
