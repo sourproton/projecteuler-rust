@@ -1,4 +1,8 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const N: usize = 10_001;
     let mut primes: [usize; N] = [0; N];
     let mut i = 2;
@@ -17,6 +21,7 @@ fn main() {
     }
 
     println!("{}", primes[N - 1]);
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 // #[cfg(test)]

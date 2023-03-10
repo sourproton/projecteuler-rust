@@ -1,10 +1,15 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const DIVISORS: [isize; 2] = [3, 5];
     const UPPER_LIMIT: isize = 999;
 
     let answer = sum_multiples(&DIVISORS, UPPER_LIMIT);
 
     println!("{answer}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn sum_multiples(divisors: &[isize], upper_limit: isize) -> isize {

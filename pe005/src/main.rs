@@ -1,9 +1,14 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const LIMIT: isize = 20;
 
     let answer = min_divisible(LIMIT);
 
     println!("{answer}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn isdivisable(n: isize, limit: isize) -> bool {

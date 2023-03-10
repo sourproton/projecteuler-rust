@@ -1,9 +1,14 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const N: usize = 501;
 
     let answer = lowest_triangular(N);
 
     println!("{answer}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn nth_triangular(n: usize) -> usize {

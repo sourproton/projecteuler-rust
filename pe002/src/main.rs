@@ -1,9 +1,14 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const LIMIT: isize = 4_000_000;
 
     let answer = sum_even_fib(LIMIT);
 
     println!("{answer}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn update_fib(fib: &mut (isize, isize)) {

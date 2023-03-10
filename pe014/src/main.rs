@@ -1,9 +1,15 @@
+use std::time::SystemTime;
+
 const LOW: usize = 1;
 const HIGH: usize = 999_999;
 
 fn main() {
+    let time = SystemTime::now();
+
     let longest = longest_collatz(LOW, HIGH);
+
     println!("{:#?}", longest);
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn longest_collatz(low: usize, high: usize) -> Collatz {

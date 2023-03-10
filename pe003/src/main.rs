@@ -1,9 +1,14 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const N: isize = 600851475143;
 
     let answer = largest_prime_factor(N);
 
     println!("{answer}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn largest_prime_factor(mut n: isize) -> isize {

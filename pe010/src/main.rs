@@ -1,4 +1,8 @@
+use std::time::SystemTime;
+
 fn main() {
+    let time = SystemTime::now();
+
     const N: usize = 2_000_000;
     let mut sieve = [true; N];
     let mut s = 0;
@@ -13,4 +17,5 @@ fn main() {
     }
 
     println!("{s}");
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
