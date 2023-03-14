@@ -26,10 +26,8 @@ fn find_closest(max_denominator: u64, target_fraction: Fraction) -> Fraction {
         denominator: 1,
     };
 
-    let mut numerator;
-
     for denominator in 2..=max_denominator {
-        numerator = find_numerator(&denominator, &target_fraction);
+        let numerator = find_numerator(&denominator, &target_fraction);
         if best_fraction.numerator * denominator < numerator * best_fraction.denominator {
             best_fraction.numerator = numerator;
             best_fraction.denominator = denominator;
