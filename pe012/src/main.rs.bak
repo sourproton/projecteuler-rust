@@ -1,4 +1,4 @@
-use std::time::SystemTime;
+use std::{collections::HashMap, time::SystemTime};
 
 const N_DIVISORS: usize = 501;
 
@@ -25,22 +25,27 @@ fn lowest_triangular(n: usize) -> usize {
 }
 
 /// returns the number of divisors of n, calculated via the factorization method
-fn count_divisors(mut n: usize) -> usize {
-    let mut number_divisors = 1;
+fn count_divisors(n: usize) -> usize {
+    factorization(n).values().map(|e| e + 1).product()
+}
+
+/// factorizes n, returning a HashMap whose keys are the primes and the values their respective
+/// expoenents.
+fn factorization(mut n: usize) -> HashMap<usize, usize> {
+    let mut fac = HashMap::new();
+
     let mut p = 2;
-    let mut count;
 
     while n != 1 {
-        count = 0;
         while n % p == 0 {
-            count += 1;
+            let count = fac.entry(p).or_insert(0);
+            *count += 1;
             n /= p;
         }
-        number_divisors *= count + 1;
         p += 1;
     }
 
-    number_divisors
+    fac
 }
 
 #[cfg(test)]
