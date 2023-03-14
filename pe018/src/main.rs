@@ -5,9 +5,9 @@ const PATH: &str = "input/input_018.txt";
 fn main() {
     let time = SystemTime::now();
 
-    let max = maximum_path_sum(parse_input(PATH));
+    let answer = maximum_path_sum(parse_input(PATH));
 
-    println!("max path sum = {}", max);
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

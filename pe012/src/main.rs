@@ -7,7 +7,7 @@ fn main() {
 
     let answer = lowest_triangular(N_DIVISORS);
 
-    println!("{answer}");
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

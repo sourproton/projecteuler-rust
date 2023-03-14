@@ -7,7 +7,7 @@ fn main() {
 
     let answer = sum_even_fib(LIMIT);
 
-    println!("{answer}");
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

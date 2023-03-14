@@ -7,7 +7,7 @@ fn main() {
 
     let answer = largest_prime_factor(N);
 
-    println!("{answer}");
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

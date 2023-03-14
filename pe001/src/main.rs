@@ -8,7 +8,7 @@ fn main() {
 
     let answer = sum_multiples(&DIVISORS, UPPER_LIMIT);
 
-    println!("{answer}");
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

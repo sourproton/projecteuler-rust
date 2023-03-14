@@ -5,11 +5,9 @@ const LIMIT: usize = 28123;
 fn main() {
     let time = SystemTime::now();
 
-    println!(
-        "sum of all numbers that are not a sum of two abundant numbers: {}",
-        sum_not_sum_two_abundants()
-    );
+    let answer = sum_not_sum_two_abundants();
 
+    println!("answer: {answer}");
     println!("time elapsed: {} ms", time.elapsed().unwrap().as_millis());
 }
 

@@ -8,7 +8,11 @@ fn main() {
 
     let longest = longest_collatz(LOW, HIGH);
 
-    println!("{:#?}", longest);
+    let answer = longest.number;
+
+    println!("longest found: {longest:#?}");
+
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

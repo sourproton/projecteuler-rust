@@ -7,8 +7,7 @@ fn main() {
 
     let answer = sum_amicables(LIMIT);
 
-    println!("sum of amicable numbers below {LIMIT} is {answer}");
-
+    println!("answer: {answer}");
     println!("elapsed time = {} ms", time.elapsed().unwrap().as_millis());
 }
 

@@ -8,7 +8,7 @@ fn main() {
     let mut input = parse_input(PATH);
     let answer = max_path_sum(&mut input);
 
-    println!("max path sum = {}", answer);
+    println!("answer: {answer}");
     println!("elapsed time = {} ms", time.elapsed().unwrap().as_millis());
 }
 

@@ -10,10 +10,13 @@ const MAX_DENOMINATOR: u64 = 1_000_000;
 fn main() {
     let time = SystemTime::now();
 
-    let answer = find_closest(MAX_DENOMINATOR, TARGET_FRACTION);
+    let fraction = find_closest(MAX_DENOMINATOR, TARGET_FRACTION);
 
-    println!("closest fraction: {:#?}", answer);
+    let answer = fraction.numerator;
 
+    println!("fraction: {fraction:#?}");
+
+    println!("answer: {answer:#?}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

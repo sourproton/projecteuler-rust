@@ -20,7 +20,9 @@ fn main() {
         }
     }
 
-    println!("{}", primes[N - 1]);
+    let answer = primes[N - 1];
+
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 

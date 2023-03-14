@@ -7,7 +7,7 @@ fn main() {
 
     let answer = min_divisible(LIMIT);
 
-    println!("{answer}");
+    println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
