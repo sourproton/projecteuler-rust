@@ -9,7 +9,7 @@ fn main() {
     let answer = max_path_sum(&mut input);
 
     println!("answer: {answer}");
-    println!("elapsed time = {} ms", time.elapsed().unwrap().as_millis());
+    println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
 fn max_path_sum(input: &mut Vec<Vec<u32>>) -> u32 {

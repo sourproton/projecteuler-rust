@@ -1,10 +1,10 @@
 use std::time::SystemTime;
 
-const DIVISORS: [u32; 2] = [3, 5];
-const UPPER_LIMIT: u32 = 999;
-
 fn main() {
     let time = SystemTime::now();
+
+    const DIVISORS: [isize; 2] = [3, 5];
+    const UPPER_LIMIT: isize = 999;
 
     let answer = sum_multiples(&DIVISORS, UPPER_LIMIT);
 
@@ -12,10 +12,17 @@ fn main() {
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
-fn sum_multiples(divisors: &[u32], upper_limit: u32) -> u32 {
-    (1..=upper_limit)
-        .filter(|n| divisors.iter().any(|d| n % d == 0))
-        .sum()
+fn sum_multiples(divisors: &[isize], upper_limit: isize) -> isize {
+    let mut s = 0;
+    for i in 1..=upper_limit {
+        for d in divisors {
+            if i % d == 0 {
+                s += i;
+                break;
+            }
+        }
+    }
+    s
 }
 
 #[cfg(test)]

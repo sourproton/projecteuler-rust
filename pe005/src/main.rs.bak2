@@ -13,14 +13,21 @@ fn main() {
 
 /// calculates the smallest multiple of all numbers from 1 up to `n`
 fn smallest_multiple(n: u32) -> u32 {
-    // factorization of all numbers from 1 to n
     let factorizations = gen_factorizations(n);
-
-    // picking the largest exponent from each base
     let combined = combined_factorizations(factorizations);
 
-    // multiplying the bases raised to their powers
-    combined.iter().map(|(k, v)| k.pow(*v)).product()
+    multiply_factorization(combined)
+}
+
+/// returns the product of every key elevated to its exponent
+fn multiply_factorization(factorization: HashMap<u32, u32>) -> u32 {
+    let mut prod = 1;
+
+    for (k, v) in factorization {
+        prod *= k.pow(v)
+    }
+
+    prod
 }
 
 /// takes each base of each factorization and combines the biggest exponent of each in a HashMap
@@ -74,13 +81,20 @@ fn factorize(mut n: u32) -> HashMap<u32, u32> {
 mod tests {
     use std::collections::HashMap;
 
-    use crate::{factorize, smallest_multiple};
+    use crate::{factorize, multiply_factorization, smallest_multiple};
 
     #[test]
     fn test_factorize() {
         let fac = factorize(60);
         let answer = HashMap::from([(2, 2), (3, 1), (5, 1)]);
         assert_eq!(answer, fac);
+    }
+
+    #[test]
+    fn test_multiply_factorization() {
+        let n = 60;
+        let fac = factorize(n);
+        assert_eq!(n, multiply_factorization(fac));
     }
 
     #[test]

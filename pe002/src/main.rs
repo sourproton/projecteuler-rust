@@ -1,9 +1,9 @@
 use std::time::SystemTime;
 
+const LIMIT: isize = 4_000_000;
+
 fn main() {
     let time = SystemTime::now();
-
-    const LIMIT: isize = 4_000_000;
 
     let answer = sum_even_fib(LIMIT);
 

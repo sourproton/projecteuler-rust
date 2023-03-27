@@ -1,37 +1,49 @@
 use std::time::SystemTime;
 
+// const N: u32 = 1_000_000;
+const N: u32 = 10_001;
+
 fn main() {
     let time = SystemTime::now();
 
-    const N: usize = 10_001;
-    let mut primes: [usize; N] = [0; N];
-    let mut i = 2;
-
-    while primes[N - 1] == 0 {
-        for p in 0..N {
-            if primes[p] == 0 {
-                primes[p] = i;
-                i += 1;
-                break;
-            } else if i % primes[p] == 0 {
-                i += 1;
-                break;
-            }
-        }
-    }
-
-    let answer = primes[N - 1];
+    let answer = nth_prime(N);
 
     println!("answer: {answer}");
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//
-//     #[test]
-//     fn working() {
-//         assert_eq!(2 + 2, 4)
-//     }
-// }
+fn nth_prime(n: u32) -> u32 {
+    let mut primes = Vec::from([2]);
+
+    while (primes.len() as u32) < n {
+        push_next_prime(&mut primes);
+    }
+
+    *primes.last().unwrap()
+}
+
+fn push_next_prime(primes: &mut Vec<u32>) {
+    let mut candidate = primes.last().unwrap().to_owned() + 1;
+    let mut max_prime = (candidate as f32).sqrt() as u32;
+
+    while primes
+        .iter()
+        .take_while(|p| **p <= max_prime)
+        .any(|p| candidate % p == 0)
+    {
+        candidate += 1;
+        max_prime = (candidate as f32).sqrt() as u32;
+    }
+
+    primes.push(candidate);
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::nth_prime;
+
+    #[test]
+    fn test_nth_prime() {
+        assert_eq!(13, nth_prime(6));
+    }
+}
