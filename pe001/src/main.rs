@@ -12,6 +12,8 @@ fn main() {
     println!("elapsed time: {} ms", time.elapsed().unwrap().as_millis());
 }
 
+/// From 1 to `upper_limit`, returns the sum of all that are divisible by at least one of the
+/// `divisors`
 fn sum_multiples(divisors: &[u32], upper_limit: u32) -> u32 {
     (1..=upper_limit)
         .filter(|n| divisors.iter().any(|d| n % d == 0))
@@ -21,6 +23,7 @@ fn sum_multiples(divisors: &[u32], upper_limit: u32) -> u32 {
 #[cfg(test)]
 mod tests {
     use crate::sum_multiples;
+
     #[test]
     fn test_sum_multiples() {
         assert_eq!(sum_multiples(&[3, 5], 9), 23);
